@@ -8,6 +8,7 @@ public class Shark extends Fish {
     public Shark(World world, int row, int col, int age, int energy) {
         super(world, row, col, age);
         this.energy = energy;
+        type = SHARK;
     }
 
     @Override
