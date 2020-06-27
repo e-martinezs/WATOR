@@ -17,7 +17,6 @@ public class World {
     private int numFish;
     private int numSharks;
 
-    private Random random;
     private int[][] world;
     private List<Fish> entities = new ArrayList<Fish>();
 
@@ -34,7 +33,7 @@ public class World {
         int numEntities = (int)(cols*rows*(percentageEntities/100f));
         int numFish = (int)(numEntities*(percentageFish/100f));
         int numSharks = numEntities-numFish;
-        random = new Random();
+        Random random = new Random();
 
         int col, row;
         for (int i=0; i<numFish; i++){
@@ -58,14 +57,31 @@ public class World {
 
     public void addEntity(Fish fish){
         entities.add(fish);
+        world[fish.getRow()][fish.getCol()] = fish.getType();
     }
 
     public void removeEntity(Fish fish){
         entities.remove(fish);
+        world[fish.getRow()][fish.getCol()] = 0;
+    }
+
+    public void moveEntity(Fish fish, int col, int row){
+        world[fish.getRow()][fish.getCol()] = 0;
+        world[row][col] = fish.getType();
     }
 
     public boolean isEmpty(int col, int row){
+        if (!isInsideBounds(col, row)){
+            return false;
+        }
         return world[row][col] == 0;
+    }
+
+    public boolean isInsideBounds(int col, int row){
+        if (col >= 0 && col < cols && row >= 0 && row < rows){
+            return true;
+        }
+        return false;
     }
 
     public void update(){

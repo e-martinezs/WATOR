@@ -4,11 +4,9 @@
     <list default="true" id="cfe77dad-0b41-4964-bbeb-21063e429e95" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/entities/Fish.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/entities/Fish.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/entities/Shark.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/entities/Shark.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/entities/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/entities/World.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/panels/WaTorPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/panels/WaTorPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sndk2/entities/Fish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/entities/Fish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sndk2/entities/Shark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/entities/Shark.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sndk2/entities/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/entities/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sndk2/panels/WaTorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/panels/WaTorPanel.java" afterDir="false" />
     </list>
@@ -73,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1593212668617</updated>
-      <workItem from="1593212672325" duration="10349000" />
+      <workItem from="1593212672325" duration="11465000" />
     </task>
     <servers />
   </component>

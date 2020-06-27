@@ -1,5 +1,7 @@
 package com.sndk2.entities;
 
+import java.util.Random;
+
 public class Fish {
 
     public static final int FISH = 1;
@@ -21,7 +23,31 @@ public class Fish {
     }
 
     public void update(){
+        move();
+    }
 
+    private void move(){
+        Random random = new Random();
+        int[] movesX = new int[8];
+        int[] movesY = new int[8];
+        int counter = 0;
+
+        for (int i=col-1; i<=col+1; i++){
+            for (int j=row-1; j<=row+1; j++){
+                if (world.isEmpty(i, j)){
+                    movesX[counter] = i;
+                    movesY[counter] = j;
+                    counter++;
+                }
+            }
+        }
+
+        if (counter > 0){
+            int move = random.nextInt(counter);
+            world.moveEntity(this, movesX[move], movesY[move]);
+            this.col = movesX[move];
+            this.row = movesY[move];
+        }
     }
 
     public int getRow() {
