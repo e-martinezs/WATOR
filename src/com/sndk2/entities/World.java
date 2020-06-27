@@ -25,8 +25,8 @@ public class World {
     public World(int cols, int rows, float percentageEntities, float percentageFish){
         this.cols = cols;
         this.rows = rows;
-        this.percentageEntities = percentageEntities;
-        this.percentageFish = percentageFish;
+        this.percentageEntities = Math.min(percentageEntities, 100.0f);
+        this.percentageFish = Math.min(percentageFish, 100.0f);
         world = new Fish[rows][cols];
         generateEntities();
     }
@@ -128,12 +128,12 @@ public class World {
     }
 
     private void drawBackground(Graphics2D g2d){
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Variables.OCEAN_COLOR);
         g2d.fillRect(0, 0, CELL_SIZE*cols, CELL_SIZE*rows);
     }
 
     private void drawGrid(Graphics2D g2d){
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Variables.GRID_COLOR);
         for (int i=0; i<cols+1; i++){
             g2d.drawLine(i*World.CELL_SIZE, 0, i*CELL_SIZE, CELL_SIZE*rows);
         }
@@ -147,9 +147,9 @@ public class World {
         for (int i=0; i<entities.size(); i++){
             fish = entities.get(i);
             if (fish.getType() == Fish.FISH){
-                g2d.setColor(Color.GREEN);
+                g2d.setColor(Variables.FISH_COLOR);
             } else {
-                g2d.setColor(Color.RED);
+                g2d.setColor(Variables.SHARK_COLOR);
             }
             g2d.fillRect(fish.getCol()*CELL_SIZE, fish.getRow()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }

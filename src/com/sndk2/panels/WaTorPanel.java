@@ -89,8 +89,8 @@ public class WaTorPanel extends CustomPanel {
             downKey = true;
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE){
             nextStep();
-        } else if (e.getKeyCode() == KeyEvent.VK_P){
-            world.printWorld();
+        } else if (e.getKeyCode() == KeyEvent.VK_C){
+            initCamera();
         }
     }
 
