@@ -28,14 +28,6 @@ public class Shark extends Fish {
     }
 
     @Override
-    protected void breed(){
-        if (age >= Variables.BREED_AGE_SHARK) {
-            world.addEntity(new Shark(world, col, row, 0, Variables.MAX_ENERGY_SHARK));
-            age = 0;
-        }
-    }
-
-    @Override
     protected void move(){
         Random random = new Random();
         int[] movesX = new int[9];
@@ -62,6 +54,14 @@ public class Shark extends Fish {
             this.energy += Variables.FISH_EAT_ENERGY;
         }else{
             super.move();
+        }
+    }
+
+    @Override
+    protected void breed(){
+        if (age >= Variables.BREED_AGE_SHARK) {
+            world.addEntity(new Shark(world, col, row, 0, Variables.MAX_ENERGY_SHARK));
+            age = 0;
         }
     }
 

@@ -28,13 +28,6 @@ public class Fish {
         move();
     }
 
-    protected void breed(){
-        if (age >= Variables.BREED_AGE_FISH){
-            world.addEntity(new Fish(world, col, row, 0));
-            age = 0;
-        }
-    }
-
     protected void move(){
         Random random = new Random();
         int[] movesX = new int[9];
@@ -57,6 +50,13 @@ public class Fish {
             breed();
             this.setCol(movesX[move]);
             this.setRow(movesY[move]);
+        }
+    }
+
+    protected void breed(){
+        if (age >= Variables.BREED_AGE_FISH){
+            world.addEntity(new Fish(world, col, row, 0));
+            age = 0;
         }
     }
 
