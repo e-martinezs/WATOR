@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfe77dad-0b41-4964-bbeb-21063e429e95" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sndk2/entities/Fish.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sndk2/entities/Shark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sndk2/entities/World.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sndk2/panels/CustomPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sndk2/panels/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/Wator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/Wator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/WATOR/com/sndk2/Wator.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sndk2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sndk2/Wator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/Wator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sndk2/Wator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sndk2/panels/WaTorPanel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +33,7 @@
   <component name="ProjectId" id="1dsTByOfCYWvkrhJ1FvXx6zXTyK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
@@ -46,7 +53,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.sndk2.Main" />
       <module name="WATOR" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -69,7 +75,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1593212668617</updated>
-      <workItem from="1593212672325" duration="5112000" />
+      <workItem from="1593212672325" duration="8553000" />
     </task>
     <servers />
   </component>
