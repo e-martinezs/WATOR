@@ -2,11 +2,12 @@ package com.sndk2.entities;
 
 public class Shark extends Fish {
 
-    private static int fishEnergy;
+    public static int FISH_ENERGY = 1;
+    public static int MAX_ENERGY = 5;
     private int energy;
 
-    public Shark(World world, int row, int col, int age, int energy) {
-        super(world, row, col, age);
+    public Shark(World world, int col, int row, int age, int energy) {
+        super(world, col, row, age);
         this.energy = energy;
         type = SHARK;
     }
@@ -14,14 +15,6 @@ public class Shark extends Fish {
     @Override
     public void update(){
         super.update();
-    }
-
-    public static int getFishEnergy() {
-        return fishEnergy;
-    }
-
-    public static void setFishEnergy(int fishEnergy) {
-        Shark.fishEnergy = fishEnergy;
     }
 
     public int getEnergy() {

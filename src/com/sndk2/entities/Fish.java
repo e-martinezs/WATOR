@@ -4,31 +4,24 @@ public class Fish {
 
     public static final int FISH = 1;
     public static final int SHARK = 2;
-    protected static int breedAge;
+    public static int BREED_AGE = 5;
+
     protected World world;
     protected int row;
     protected int col;
     protected int age;
     protected int type;
 
-    public Fish(World world, int row, int col, int age){
+    public Fish(World world, int col, int row, int age){
         this.world = world;
-        this.row = row;
         this.col = col;
+        this.row = row;
         this.age = age;
         type = FISH;
     }
 
     public void update(){
 
-    }
-
-    public static int getBreedAge() {
-        return breedAge;
-    }
-
-    public static void setBreedAge(int breedAge) {
-        Fish.breedAge = breedAge;
     }
 
     public int getRow() {

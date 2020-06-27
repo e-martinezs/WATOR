@@ -4,24 +4,56 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class World {
 
     public static int CELL_SIZE = 32;
     private int cols;
     private int rows;
+
+    private float percentageEntities;
+    private float percentageFish;
+    private int numFish;
+    private int numSharks;
+
+    private Random random;
     private int[][] world;
     private List<Fish> entities = new ArrayList<Fish>();
 
-    public World(int cols, int rows){
+    public World(int cols, int rows, float percentageEntities, float percentageFish){
         this.cols = cols;
         this.rows = rows;
+        this.percentageEntities = percentageEntities;
+        this.percentageFish = percentageFish;
         world = new int[rows][cols];
+        generateEntities();
+    }
 
-        addEntity(new Fish(this, 3, 5, 0));
-        addEntity(new Fish(this, 20, 14, 0));
-        addEntity(new Shark(this, 12, 8, 0, 0));
-        addEntity(new Shark(this, 6, 10, 0, 0));
+    private void generateEntities(){
+        int numEntities = (int)(cols*rows*(percentageEntities/100f));
+        int numFish = (int)(numEntities*(percentageFish/100f));
+        int numSharks = numEntities-numFish;
+        random = new Random();
+
+        int col, row;
+        for (int i=0; i<numFish; i++){
+            do {
+                col = random.nextInt(cols);
+                row = random.nextInt(rows);
+            } while (!isEmpty(col, row));
+            int age = random.nextInt(Fish.BREED_AGE);
+            addEntity(new Fish(this, col, row, age));
+        }
+        for (int i=0; i<numSharks; i++){
+            do {
+                col = random.nextInt(cols);
+                row = random.nextInt(rows);
+            } while (!isEmpty(col, row));
+            int age = random.nextInt(Fish.BREED_AGE);
+            int energy = random.nextInt(Shark.FISH_ENERGY);
+            addEntity(new Shark(this, col, row, age, energy));
+        }
     }
 
     public void addEntity(Fish fish){
@@ -30,6 +62,10 @@ public class World {
 
     public void removeEntity(Fish fish){
         entities.remove(fish);
+    }
+
+    public boolean isEmpty(int col, int row){
+        return world[row][col] == 0;
     }
 
     public void update(){
@@ -74,5 +110,21 @@ public class World {
             }
             g2d.fillRect(fish.getCol()*CELL_SIZE, fish.getRow()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
     }
 }

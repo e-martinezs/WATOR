@@ -24,17 +24,17 @@ public class WaTorPanel extends CustomPanel {
     private boolean downKey;
 
     public WaTorPanel(){
-        createBuffer();
         createWorld();
-    }
-
-    private void createBuffer(){
-        buffer = new BufferedImage(MainWindow.WIDTH, MainWindow.HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        g2d = buffer.createGraphics();
+        createBuffer();
     }
 
     private void createWorld(){
-        world = new World(40, 21);
+        world = new World(40, 21, 40.0f, 70.0f);
+    }
+
+    private void createBuffer(){
+        buffer = new BufferedImage(world.getCols()*World.CELL_SIZE, world.getRows()*World.CELL_SIZE, BufferedImage.TYPE_INT_ARGB);
+        g2d = buffer.createGraphics();
     }
 
     @Override
