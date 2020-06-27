@@ -1,5 +1,6 @@
 package com.sndk2.panels;
 
+import com.sndk2.Variables;
 import com.sndk2.entities.World;
 
 import java.awt.Color;
@@ -27,15 +28,21 @@ public class WaTorPanel extends CustomPanel {
     public WaTorPanel(){
         createWorld();
         createBuffer();
+        initCamera();
     }
 
     private void createWorld(){
-        world = new World(5, 5, 10.0f, 100.0f);
+        world = new World(Variables.WORLD_WIDTH, Variables.WORLD_HEIGHT, Variables.PERCENTAGE_ENTITIES, Variables.PERCENTAGE_FISH);
     }
 
     private void createBuffer(){
         buffer = new BufferedImage(world.getCols()*World.CELL_SIZE, world.getRows()*World.CELL_SIZE, BufferedImage.TYPE_INT_ARGB);
         g2d = buffer.createGraphics();
+    }
+
+    private void initCamera(){
+        cameraX = (world.getCols()*World.CELL_SIZE)/2f - MainWindow.WIDTH/2f;
+        cameraY = (world.getRows()*World.CELL_SIZE)/2f - MainWindow.HEIGHT/2f;
     }
 
     private void nextStep(){
@@ -82,6 +89,8 @@ public class WaTorPanel extends CustomPanel {
             downKey = true;
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE){
             nextStep();
+        } else if (e.getKeyCode() == KeyEvent.VK_P){
+            world.printWorld();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.sndk2.entities;
 
+import com.sndk2.Variables;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.Random;
 
 public class World {
 
-    public static int CELL_SIZE = 32;
+    public static final int CELL_SIZE = Variables.CELL_SIZE;
     private int cols;
     private int rows;
 
@@ -41,7 +43,7 @@ public class World {
                 col = random.nextInt(cols);
                 row = random.nextInt(rows);
             } while (!isEmpty(col, row));
-            int age = random.nextInt(Fish.BREED_AGE);
+            int age = random.nextInt(Variables.BREED_AGE_FISH);
             addEntity(new Fish(this, col, row, age));
         }
         for (int i=0; i<numSharks; i++){
@@ -49,8 +51,8 @@ public class World {
                 col = random.nextInt(cols);
                 row = random.nextInt(rows);
             } while (!isEmpty(col, row));
-            int age = random.nextInt(Fish.BREED_AGE);
-            int energy = random.nextInt(Shark.MAX_ENERGY);
+            int age = random.nextInt(Variables.BREED_AGE_SHARK);
+            int energy = random.nextInt(Variables.MAX_ENERGY_SHARK);
             addEntity(new Shark(this, col, row, age, energy));
         }
     }
@@ -66,43 +68,51 @@ public class World {
     }
 
     public void removeEntityAt(int col, int row){
-        Fish fish = world[row][col];
+        int modCol = modCols(col);
+        int modRow = modRows(row);
+        Fish fish = world[modRow][modCol];
         entities.remove(fish);
-        world[row][col] = null;
+        world[modRow][modCol] = null;
     }
 
     public void moveEntity(Fish fish, int col, int row){
+        int modCol = modCols(col);
+        int modRow = modRows(row);
         world[fish.getRow()][fish.getCol()] = null;
-        world[row][col] = fish;
+        world[modRow][modCol] = fish;
     }
 
     public boolean isEmpty(int col, int row){
-        if (!isInsideBounds(col, row)){
-            return false;
-        }
-        return world[row][col] == null;
+        int modCol = modCols(col);
+        int modRow = modRows(row);
+        return world[modRow][modCol] == null;
     }
 
     public boolean hasFish(int col, int row){
-        if (!isInsideBounds(col, row)){
+        int modCol = modCols(col);
+        int modRow = modRows(row);
+        if (world[modRow][modCol] == null){
             return false;
         }
-        if (world[row][col] == null){
-            return false;
-        }
-        return world[row][col].getType() == Fish.FISH;
+        return world[modRow][modCol].getType() == Fish.FISH;
     }
 
-    public boolean isInsideBounds(int col, int row){
-        if (col >= 0 && col < cols && row >= 0 && row < rows){
-            return true;
+    public int modCols(int col){
+        if (col < 0){
+            col = cols+col;
         }
-        return false;
+        return col%cols;
+    }
+
+    public int modRows(int row){
+        if (row < 0){
+            row = rows+row;
+        }
+        return row%rows;
     }
 
     public void update(){
         updateEntities();
-        System.out.println(entities.size());
     }
 
     private void updateEntities(){
@@ -142,6 +152,19 @@ public class World {
                 g2d.setColor(Color.RED);
             }
             g2d.fillRect(fish.getCol()*CELL_SIZE, fish.getRow()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        }
+    }
+
+    public void printWorld(){
+        for (int j=0; j<rows; j++){
+            for (int i=0; i<cols; i++){
+                if (world[j][i] != null){
+                    System.out.print(world[j][i].getType());
+                } else {
+                    System.out.print(0);
+                }
+            }
+            System.out.println();
         }
     }
 

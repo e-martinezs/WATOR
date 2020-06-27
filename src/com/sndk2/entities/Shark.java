@@ -1,12 +1,11 @@
 package com.sndk2.entities;
 
+import com.sndk2.Variables;
+
 import java.util.Random;
 
 public class Shark extends Fish {
 
-    public static int FISH_ENERGY = 1;
-    public static int MAX_ENERGY = 5;
-    public static int ENERGY_DRAIN = 1;
     private int energy;
 
     public Shark(World world, int col, int row, int age, int energy) {
@@ -17,12 +16,12 @@ public class Shark extends Fish {
 
     @Override
     public void update(){
-        loseEnergy();
         super.update();
+        loseEnergy();
     }
 
     private void loseEnergy(){
-        energy -= ENERGY_DRAIN;
+        energy -= Variables.ENERGY_DRAIN_SHARK;
         if (energy <= 0){
             world.removeEntity(this);
         }
@@ -30,7 +29,10 @@ public class Shark extends Fish {
 
     @Override
     protected void breed(){
-        world.addEntity(new Shark(world, col, row, 0, MAX_ENERGY));
+        if (age >= Variables.BREED_AGE_SHARK) {
+            world.addEntity(new Shark(world, col, row, 0, Variables.MAX_ENERGY_SHARK));
+            age = 0;
+        }
     }
 
     @Override
@@ -54,13 +56,10 @@ public class Shark extends Fish {
             int move = random.nextInt(counter);
             world.removeEntityAt(movesX[move], movesY[move]);
             world.moveEntity(this, movesX[move], movesY[move]);
-            if (age >= BREED_AGE){
-                breed();
-                age = 0;
-            }
-            this.col = movesX[move];
-            this.row = movesY[move];
-            this.energy += FISH_ENERGY;
+            breed();
+            this.setCol(movesX[move]);
+            this.setRow(movesY[move]);
+            this.energy += Variables.FISH_EAT_ENERGY;
         }else{
             super.move();
         }

@@ -1,12 +1,13 @@
 package com.sndk2.entities;
 
+import com.sndk2.Variables;
+
 import java.util.Random;
 
 public class Fish {
 
     public static final int FISH = 1;
     public static final int SHARK = 2;
-    public static int BREED_AGE = 5;
 
     protected World world;
     protected int row;
@@ -28,7 +29,10 @@ public class Fish {
     }
 
     protected void breed(){
-        world.addEntity(new Fish(world, col, row, 0));
+        if (age >= Variables.BREED_AGE_FISH){
+            world.addEntity(new Fish(world, col, row, 0));
+            age = 0;
+        }
     }
 
     protected void move(){
@@ -39,7 +43,7 @@ public class Fish {
 
         for (int i=col-1; i<=col+1; i++){
             for (int j=row-1; j<=row+1; j++){
-                if (world.isEmpty(i, j) && i != col && j != row){
+                if (world.isEmpty(i, j) && !(i == col && j == row)){
                     movesX[counter] = i;
                     movesY[counter] = j;
                     counter++;
@@ -50,12 +54,9 @@ public class Fish {
         if (counter > 0){
             int move = random.nextInt(counter);
             world.moveEntity(this, movesX[move], movesY[move]);
-            if (age >= BREED_AGE){
-                breed();
-                age = 0;
-            }
-            this.col = movesX[move];
-            this.row = movesY[move];
+            breed();
+            this.setCol(movesX[move]);
+            this.setRow(movesY[move]);
         }
     }
 
@@ -64,7 +65,7 @@ public class Fish {
     }
 
     public void setRow(int row) {
-        this.row = row;
+        this.row = world.modRows(row);
     }
 
     public int getCol() {
@@ -72,7 +73,7 @@ public class Fish {
     }
 
     public void setCol(int col) {
-        this.col = col;
+        this.col = world.modCols(col);
     }
 
     public int getAge() {
