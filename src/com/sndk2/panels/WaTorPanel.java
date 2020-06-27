@@ -13,6 +13,7 @@ public class WaTorPanel extends CustomPanel {
     private BufferedImage buffer;
     private Graphics2D g2d;
     private World world;
+    private int chrononStep = 1;
 
     private float cameraX;
     private float cameraY;
@@ -37,23 +38,26 @@ public class WaTorPanel extends CustomPanel {
         g2d = buffer.createGraphics();
     }
 
+    private void nextStep(){
+        for (int i=0; i<chrononStep; i++){
+            world.update();
+        }
+    }
+
     @Override
     public void update(double delta){
         updateCamera(delta);
-        world.update();
     }
 
     private void updateCamera(double delta){
         if (rightKey){
             cameraX += cameraSpeed*delta;
-        }
-        else if (leftKey){
+        } else if (leftKey){
             cameraX -= cameraSpeed*delta;
         }
         if (upKey){
             cameraY -= cameraSpeed*delta;
-        }
-        else if (downKey){
+        } else if (downKey){
             cameraY += cameraSpeed*delta;
         }
     }
@@ -70,15 +74,14 @@ public class WaTorPanel extends CustomPanel {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
             rightKey = true;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT){
             leftKey = true;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_UP){
+        } else if (e.getKeyCode() == KeyEvent.VK_UP){
             upKey = true;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN){
             downKey = true;
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE){
+            nextStep();
         }
     }
 
@@ -86,14 +89,11 @@ public class WaTorPanel extends CustomPanel {
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
             rightKey = false;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT){
             leftKey = false;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_UP){
+        } else if (e.getKeyCode() == KeyEvent.VK_UP){
             upKey = false;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN){
             downKey = false;
         }
     }
