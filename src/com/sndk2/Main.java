@@ -38,10 +38,13 @@ public class Main extends JFrame implements Runnable{
     }
 
     private void displayWator(){
+        this.setVisible(false);
         Wator wator  = new Wator();
         wator.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         panel = wator;
         this.add(wator);
+        this.repaint();
+        this.setVisible(true);
     }
 
     private void start(){
