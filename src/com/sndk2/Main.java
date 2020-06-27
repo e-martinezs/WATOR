@@ -4,8 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Main extends JFrame implements Runnable{
+public class Main extends JFrame implements Runnable, KeyListener {
 
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
@@ -34,6 +36,7 @@ public class Main extends JFrame implements Runnable{
         this.setSize(WIDTH, HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.addKeyListener(this);
         this.setVisible(true);
     }
 
@@ -62,13 +65,15 @@ public class Main extends JFrame implements Runnable{
     public void run(){
         while (isRunning){
             currentTime = System.nanoTime();
-            deltaTime += (currentTime - lastLoopTime) / 30.0f;
-            lastLoopTime = currentTime;
-            while (deltaTime >= 1){
+            deltaTime = (currentTime - lastLoopTime)/100000.0f;
+            try {
+                Thread.sleep(10);
                 update(deltaTime);
-                deltaTime--;
+                render();
+            } catch (Exception e){
+                e.printStackTrace();
             }
-            render();
+            lastLoopTime = currentTime;
         }
     }
 
@@ -78,5 +83,20 @@ public class Main extends JFrame implements Runnable{
 
     private void render(){
         this.repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        panel.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        panel.keyReleased(e);
     }
 }
