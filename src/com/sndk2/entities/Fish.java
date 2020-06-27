@@ -23,20 +23,15 @@ public class Fish {
     }
 
     public void update(){
-        breed();
+        age++;
         move();
     }
 
-    private void breed(){
-        if (age >= BREED_AGE){
-            world.addEntity(new Fish(world, col, row, 0));
-            age = 0;
-        }else {
-            age++;
-        }
+    protected void breed(){
+        world.addEntity(new Fish(world, col, row, 0));
     }
 
-    private void move(){
+    protected void move(){
         Random random = new Random();
         int[] movesX = new int[9];
         int[] movesY = new int[9];
@@ -55,6 +50,10 @@ public class Fish {
         if (counter > 0){
             int move = random.nextInt(counter);
             world.moveEntity(this, movesX[move], movesY[move]);
+            if (age >= BREED_AGE){
+                breed();
+                age = 0;
+            }
             this.col = movesX[move];
             this.row = movesY[move];
         }

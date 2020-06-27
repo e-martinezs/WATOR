@@ -17,7 +17,7 @@ public class World {
     private int numFish;
     private int numSharks;
 
-    private int[][] world;
+    private Fish[][] world;
     private List<Fish> entities = new ArrayList<Fish>();
 
     public World(int cols, int rows, float percentageEntities, float percentageFish){
@@ -25,7 +25,7 @@ public class World {
         this.rows = rows;
         this.percentageEntities = percentageEntities;
         this.percentageFish = percentageFish;
-        world = new int[rows][cols];
+        world = new Fish[rows][cols];
         generateEntities();
     }
 
@@ -50,31 +50,47 @@ public class World {
                 row = random.nextInt(rows);
             } while (!isEmpty(col, row));
             int age = random.nextInt(Fish.BREED_AGE);
-            int energy = random.nextInt(Shark.FISH_ENERGY);
+            int energy = random.nextInt(Shark.MAX_ENERGY);
             addEntity(new Shark(this, col, row, age, energy));
         }
     }
 
     public void addEntity(Fish fish){
         entities.add(fish);
-        world[fish.getRow()][fish.getCol()] = fish.getType();
+        world[fish.getRow()][fish.getCol()] = fish;
     }
 
     public void removeEntity(Fish fish){
         entities.remove(fish);
-        world[fish.getRow()][fish.getCol()] = 0;
+        world[fish.getRow()][fish.getCol()] = null;
+    }
+
+    public void removeEntityAt(int col, int row){
+        Fish fish = world[row][col];
+        entities.remove(fish);
+        world[row][col] = null;
     }
 
     public void moveEntity(Fish fish, int col, int row){
-        world[fish.getRow()][fish.getCol()] = 0;
-        world[row][col] = fish.getType();
+        world[fish.getRow()][fish.getCol()] = null;
+        world[row][col] = fish;
     }
 
     public boolean isEmpty(int col, int row){
         if (!isInsideBounds(col, row)){
             return false;
         }
-        return world[row][col] == 0;
+        return world[row][col] == null;
+    }
+
+    public boolean hasFish(int col, int row){
+        if (!isInsideBounds(col, row)){
+            return false;
+        }
+        if (world[row][col] == null){
+            return false;
+        }
+        return world[row][col].getType() == Fish.FISH;
     }
 
     public boolean isInsideBounds(int col, int row){
@@ -86,6 +102,7 @@ public class World {
 
     public void update(){
         updateEntities();
+        System.out.println(entities.size());
     }
 
     private void updateEntities(){

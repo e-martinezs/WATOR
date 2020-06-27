@@ -30,7 +30,7 @@ public class WaTorPanel extends CustomPanel {
     }
 
     private void createWorld(){
-        world = new World(40, 21, 10.0f, 100.0f);
+        world = new World(5, 5, 10.0f, 100.0f);
     }
 
     private void createBuffer(){
